@@ -31,6 +31,10 @@ class FluentDOMLoaderStringXML implements FluentDOMLoader {
   * @return DOMDocument|NULL
   */
   public function load($source, &$contentType) {
+    if ($source == '') {
+      throw new InvalidArgumentException('The source XML string is empty.');
+    }
+
     if (is_string($source) &&
         FALSE !== strpos($source, '<') &&
         $contentType == 'text/xml') {

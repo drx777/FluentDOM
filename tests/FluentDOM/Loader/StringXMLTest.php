@@ -38,6 +38,17 @@ class FluentDOMLoaderStringXMLTest extends FluentDOMTestCase {
     $result = $loader->load('foobar', $contentType);
     $this->assertNull($result);
   }
+
+  public function testLoadEmpty() {
+    $loader = new FluentDOMLoaderStringXML();
+    $contentType = 'text/xml';
+    try {
+      $result = $loader->load('', $contentType);
+      $this->fail('An expected exception has not been raised.');
+    } catch (InvalidArgumentException $e) {
+      $this->assertEquals('The source XML string is empty.', $e->getMessage());
+    }
+  }
 }
 
 ?>
